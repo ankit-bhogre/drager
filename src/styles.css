@@ -86,8 +86,9 @@ background-color:#D9DDE0;
 }
 h6.artab_innertext {
     background: #D8DCE0;
-    padding: 6px;
+    padding: 8px 10px;
     font-weight: 600;
+	letter-spacing: 0.2px;
 }
 .artab_requiredtext {
     padding: 8px;
@@ -120,7 +121,7 @@ input[type="file"]{
     background-image: -moz-linear-gradient(90deg, #d2d0d0 0%, #f0f0f0 100%);
  }
  .arliquid_center_section {
-    height: 100vh;
+    /* height: 100vh; */
     background-color: #ECF0F3;
 }
 .artab_uploadcover {
@@ -153,4 +154,10 @@ input[type="file"]{
 }
 .artab_insert_add{
     cursor: pointer;
+}
+.col-6{ float:left;}
+@media (min-width: 1200px){
+.container {
+    max-width: 100%;
+}
 }

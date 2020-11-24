@@ -35,10 +35,10 @@
            </div>
            <ul class="uib-list arliquid_aside_list">
             <li class="uib-list__item arliquid_aside_active">
-              <a class="uib-list__link arliquid_aside_activetext" href="#">Item list</a>
+              <a class="uib-list__link arliquid_aside_activetext" href="#">cover latter</a>
             </li>
             <li class="uib-list__item arliquid_aside_active">
-              <a class="uib-list__link arliquid_aside_activetext" href="#">Item list</a>
+              <a class="uib-list__link arliquid_aside_activetext" href="#">budgetary quote</a>
             </li>
             <li class="uib-list__item ">
               <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">Item list
@@ -73,13 +73,13 @@
                   <a class="nav-link active" id="document-tab" data-toggle="tab" href="#documentselection" role="tab" aria-controls="documentselection" aria-selected="true">Document Selection</a>
                 </li>
                 <li class="nav-item arliquid_nav_item">
-                  <a class="nav-link" id="pdf-tab" data-toggle="tab" href="#pdfpreview" role="tab" aria-controls="pdfpreview" aria-selected="false">PDF preview</a>
+                  <a class="nav-link" id="pdf-tab" data-toggle="tab" href="#pdfpreview" role="tab" aria-controls="pdfpreview" aria-selected="false">PDF Preview</a>
                 </li>
               </ul>
               
               <div class="tab-content arliquid_tab_content" id="myTabContent" >
                 <div class="tab-pane fade show active" id="documentselection" role="tabpanel" aria-labelledby="document-tab">
-                    <div class="row">
+                    <div class="">
                         <div class="col-6 mr-0 pr-0">
                           <!-- section 1 -->
                             <div class="arliquid_tab_innerbody">
@@ -94,9 +94,7 @@
                                      <div class="col-7 pl-0 ml-0">
                                     <form>
                                       <div class="form-group">
-                                        <!-- (change)="handleFileInput($event.target.files)" -->
-                                        <!-- <label for="exampleFormControlFile1">Example file input</label> -->
-                                        <input type="file" accept=".pdf" (change)="requiredInput('cover',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
+                                        <input type="file" accept=".pdf"  class="form-control-file" id="exampleFormControlFile1">
                                       </div>
                                     </form>
                                     </div>
@@ -104,7 +102,7 @@
                                      <div class="col-7 pl-0 ml-0">
                                        <form>
                                       <div class="form-group">
-                                        <input type="file"  accept=".pdf" (change)="requiredInput('budegetary',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
+                                        <input type="file"  accept=".pdf" class="form-control-file" id="exampleFormControlFile1">
                                       </div>
                                     </form>
                                      </div>
@@ -114,38 +112,43 @@
                                 <div class="artab_uploadcover"> 
                                   <p class="artab_requiredtext">Optional</p>
                                   <div class="artab_innerrequire row">
-                                    <div class="col-5">Reference material</div>
-                                    <div class="col-7 pl-0 ml-0">
-                                   <form>
-                                     <div class="form-group">
-                                       <!-- (change)="handleFileInput($event.target.files)" -->
-                                       <!-- <label for="exampleFormControlFile1">Example file input</label> -->
-                                       <input type="file"  accept=".pdf" (change)="requiredInput('reference',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
-                                     </div>
-                                   </form>
-                                   </div>
-                                    <div class="col-5">Drawing</div>
-                                    <div class="col-7 pl-0 ml-0">
+                                    <div class="col-12">
+                                     <div class="row" *ngFor="let fieldname of uploadpdfField; let i = index">
+                                        <div class="col-5">{{fieldname.name}}</div>
+                                        <div class="col-7 pl-0 ml-0">
                                       <form>
-                                     <div class="form-group">
-                                       <input type="file"  accept=".pdf" (change)="requiredInput('drawing',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
-                                     </div>
-                                   </form>
+                                        <div class="form-group">
+                                          <input type="file"  accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
+                                        </div>
+                                      </form>
+                                      </div>
+                                        <!-- <div class="col-5">Drawing</div>
+                                        <div class="col-7 pl-0 ml-0">
+                                          <form>
+                                        <div class="form-group">
+                                          <input type="file"  accept=".pdf" (change)="requiredInput('drawing',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
+                                        </div>
+                                      </form>
+                                        </div>
+                                        <div class="col-5">PDF Document</div>
+                                        <div class="col-7 pl-0 ml-0">
+                                          <form>
+                                        <div class="form-group">
+                                          <input type="file"  accept=".pdf" (change)="requiredInput('pdfdocument',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
+                                        </div>
+                                      </form>
+                                        </div> -->
                                     </div>
-                                    <div class="col-5">PDF Document</div>
-                                    <div class="col-7 pl-0 ml-0">
-                                      <form>
-                                     <div class="form-group">
-                                       <input type="file"  accept=".pdf" (change)="requiredInput('pdfdocument',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
-                                     </div>
-                                   </form>
-                                    </div>
+                                  </div>
                                     <!-- insert additional field button -->
-                                     <div class="artab_insert_add col-12 text-center">
-                                      <!-- <button type="button" class="btn btn-primary">Insert additional field</button> -->
+                                     <div class="artab_insert_add col-12 text-center  ">
+                                       <a (click)="oninsertfield()">
                                       <button type="button" class="uib-button uib-button--circular add_btn_circle">+</button>
-                                      <span class="add_btn_circletext">Insert additional field</span>
+                                      <span  class="add_btn_circletext">Insert additional field</span>
+                                    </a>
                                      </div>
+
+
                                      <div class="artab_insert_additional col-12 text-right pb-3">
                                       <div class="uib-actionbar add_btn" role="group">
                                         <button type="button" class="uib-button uib-button--action add_btn_inner" (click)="submitPdf()">Add</button>
@@ -157,267 +160,78 @@
                             </div>
                             
                         </div>
-                        <div class="col-6 ml-0 pl-0">
+                        <div class="col-6 ml-0 pl-0"  *ngFor="let Sec of newpdfdocs">
                             <div class="arliquid_tab_innerbody1">
                                 <div class="artab_innerheading">
-                                    <h6 class="artab_innertext">Select third-party data sheets</h6>
+                                    <h6 class="artab_innertext">{{Sec.section_type}}</h6>
                                 </div>
-                                <!--  -->
-                                <div class="uib-accordion">
+                                <div class="uib-accordion" *ngFor="let newdata of Sec.main_modules">
                                   <div class="uib-accordion__section">
-                                    <input
-                                      class="uib-accordion__toggle"
-                                      type="checkbox"
-                                      id="analyse-event-logs"
-                                    />
-                                    <label class="uib-accordion__label" for="analyse-event-logs">
-                                      Fire & Smoke Detection 
+                                    <input class="uib-accordion__toggle" type="checkbox" id="{{newdata.mid}}" />
+                                    <label class="uib-accordion__label" for="{{newdata.mid}}">
+                                      {{newdata.module_name}}
                                     </label>
                                     <div class="uib-accordion__content">
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim veniam, isi enim ad minim veniam Lorem
-                                          ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                          nibh euismod tincidunt uLorem ipsum dolor sit amet, consectetuer
-                                          adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet,
-                                          consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                          ut
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                
-                                  <div class="uib-accordion__section">
-                                    <input
-                                      class="uib-accordion__toggle"
-                                      type="checkbox"
-                                      id="expert_diagnosis"
-                                    />
-                                    <label class="uib-accordion__label" for="expert_diagnosis">
-                                      Horns & Strobes (Alarm Device)
-                                    </label>
-                                    <div class="uib-accordion__content">
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim veniam, isi enim ad minim veniam Lorem
-                                          ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                          nibh euismod tincidunt uLorem ipsum dolor sit amet, consectetuer
-                                          adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet,
-                                          consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                          ut
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div class="uib-accordion__section">
-                                    <input
-                                      class="uib-accordion__toggle"
-                                      type="checkbox"
-                                      id="expert_diagnosis3"
-                                    />
-                                    <label class="uib-accordion__label" for="expert_diagnosis3">
-                                      Manual Call Points
-                                    </label>
-                                    <div class="uib-accordion__content">
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim veniam, isi enim ad minim veniam Lorem
-                                          ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                          nibh euismod tincidunt uLorem ipsum dolor sit amet, consectetuer
-                                          adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet,
-                                          consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                          ut
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
+                                      <div class="uib-accordion__paragraph" *ngFor="let PDF of newdata.module_pdfs">
+                                        <label class="uib-accordion__title"><input type="checkbox" value="{{PDF.pdf_id}}" /> {{PDF.pdf_title}}</label>                                        
                                       </div>
                                     </div>
                                   </div>
                                 </div>
-                                <!--  -->
                             </div>
-                            <div class="arliquid_tab_innerbody2">
+
+                            <!-- <div class="arliquid_tab_innerbody1">
                                 <div class="artab_innerheading">
-                                    <h6 class="artab_innertext">Select Product information documents</h6>
-                                </div>
+                                    <h6 class="artab_innertext">Select third-party data sheets</h6>
+                                </div> -->
                                 <!--  -->
-                                <div class="uib-accordion">
-                                  <div class="uib-accordion__section">
-                                    <input
-                                      class="uib-accordion__toggle"
-                                      type="checkbox"
-                                      id="analyse-event-logs1"
-                                    />
+                                <!-- <div class="uib-accordion" *ngFor="let Sec of ModPdfs">
+                                  <div class="uib-accordion__section" *ngIf="Sec.section_id == 1">
+                                    <input class="uib-accordion__toggle" type="checkbox" id="analyse-event-logs" />
+                                    <label class="uib-accordion__label" for="analyse-event-logs">
+                                      {{Sec.module_name}}
+                                    </label>
+                                    <div class="uib-accordion__content">
+                                      <div class="uib-accordion__paragraph" *ngFor="let PDF of Sec.module_pdfs">
+                                        <label class="uib-accordion__title"><input type="checkbox" value="{{PDF.pdf_id}}" /> {{PDF.pdf_title}}</label>                                        
+                                      </div>
+                                    </div>
+                                  </div>
+                                     
+                                </div> -->
+                                <!--  -->
+                            <!-- </div> -->
+                            <!-- <div class="arliquid_tab_innerbody2"> -->
+                                <!-- <div class="artab_innerheading">
+                                    <h6 class="artab_innertext">Select Product information documents</h6>
+                                </div> -->
+                                <!--  -->
+                                <!-- <div class="uib-accordion" *ngFor="let Sec of ModPdfs">
+                                  <div class="uib-accordion__section" *ngIf="Sec.section_id == 2">
+                                    <input class="uib-accordion__toggle" type="checkbox" id="analyse-event-logs1" />
                                     <label class="uib-accordion__label" for="analyse-event-logs1">
-                                      Analyse Event Logs
+                                      {{Sec.module_name}}
                                     </label>
                                     <div class="uib-accordion__content">
                                       <div class="uib-accordion__paragraph">
                                         <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
                                       </div>
                                       <div class="uib-accordion__paragraph">
                                         <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim veniam, isi enim ad minim veniam Lorem
-                                          ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                          nibh euismod tincidunt uLorem ipsum dolor sit amet, consectetuer
-                                          adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                        </p>
                                       </div>
                                       <div class="uib-accordion__paragraph">
                                         <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet,
-                                          consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                          ut
-                                        </p>
                                       </div>
                                       <div class="uib-accordion__paragraph">
                                         <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
                                       </div>
                                     </div>
                                   </div>
                                 
-                                  <div class="uib-accordion__section">
-                                    <input
-                                      class="uib-accordion__toggle"
-                                      type="checkbox"
-                                      id="expert_diagnosis2"
-                                    />
-                                    <label class="uib-accordion__label" for="expert_diagnosis2">
-                                      Expert Diagnosis
-                                    </label>
-                                    <div class="uib-accordion__content">
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim veniam, isi enim ad minim veniam Lorem
-                                          ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                          nibh euismod tincidunt uLorem ipsum dolor sit amet, consectetuer
-                                          adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut Lorem ipsum dolor sit amet,
-                                          consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt
-                                          ut
-                                        </p>
-                                      </div>
-                                      <div class="uib-accordion__paragraph">
-                                        <p class="uib-accordion__title">Lorem ipsum</p>
-                                        <p class="uib-accordion__text">
-                                          Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam
-                                          nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat
-                                          volutpat. Ut wisi enim ad minim, isi enim ad minim veniam
-                                        </p>
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
+                                   
+                                </div> -->
                                 <!--  -->
-                            </div>
+                            <!-- </div> -->
                         </div>
                     </div>
                 </div>
