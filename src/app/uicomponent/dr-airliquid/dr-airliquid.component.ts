@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {constant,mergepdf} from '../../_services/constant'; 
+import {ApiservicesService} from '../../_services/apiservices.service';
+import { SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 @Component({
   selector: 'app-dr-airliquid',
   templateUrl: './dr-airliquid.component.html',
   styleUrls: ['./dr-airliquid.component.css']
 })
+
 export class DrAirliquidComponent implements OnInit {
   coverLetter = null;
   budgetaryQuote = null;
@@ -13,32 +16,64 @@ export class DrAirliquidComponent implements OnInit {
   pdfDocument = null;
   ModPdfs;
   pdfFiles = [];
+ newValue = false;
+ pdfErr = false;
+ pdfErrMsg;
+ srcs:any;
+ urlSafe: SafeResourceUrl;
+
+//  srcs = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
   // {"section_type":"Select product information documents","mainsection_id":2,"main_modules":[]}
   // Select third-party data sheets
   newpdfdocs = [
   {"section_type":"","mainsection_id":"","main_modules":[]},
   {"section_type":"","mainsection_id":"","main_modules":[]}
 ]
-uploadmainField = [{"name":"Cover letter"},{"name":"Budgetary quote"}]
-uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawing"},{"unid":5,"name":"PDF Document"},{"unid":6,"name":"PDF Document"}]
-  constructor(private http: HttpClient) { }
+uploadmainField = [{"unid":1,"name":"Cover letter"},{"unid":2,"name":"Budgetary quote"}]
+// ,{"unid":5,"name":"PDF Document"},{"unid":6,"name":"PDF Document"}
+uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawing"}]
+  constructor(private apiservices:ApiservicesService,public sanitizer:DomSanitizer) {
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('http://127.0.0.1:8080/1606304420514.6174file.pdf');
+   }
+ 
   oninsertfield(){
-
+  let newid_index = this.uploadpdfField.length -1;
+  let newid = this.uploadpdfField[newid_index].unid;
+    newid++;
+    let fielddata = {
+      "unid":newid,
+      "name":"PDF Document"
+    }
+    this.uploadpdfField.push(fielddata);
+    console.log('m new arr', this.uploadpdfField);
   }
   requiredInput(uniqueid,index,file){
+  
     console.log('index',index,uniqueid);
-    console.log('my array ++',this.pdfFiles[index]);
-    // this.pdfFiles.splice(index,1);
-  // this.pdfFiles.push(file)
-  if (typeof this.pdfFiles[index] !== 'undefined' && this.pdfFiles[index] !== null) {
-    console.log('check one',this.pdfFiles);
-    this.pdfFiles[index] = file ;
-  }else{
-    this.pdfFiles.push(file) 
+    console.log('my array ++',this.pdfFiles.length);
 
-    console.log('check two',this.pdfFiles);
+ if(this.pdfFiles.length == 0){
+  let uniquevalue = {
+    id:uniqueid,
+    filename:file
+  }
+  this.pdfFiles.push(uniquevalue);
+  console.log('check one //',this.pdfFiles); 
+ }else{
+  let index = this.pdfFiles.findIndex(x => x.id === uniqueid);
+  if( index === -1){
+    let uniquevalue = {
+      id:uniqueid,
+      filename:file
+    }
+    this.pdfFiles.push(uniquevalue);
+  }else{
+    this.pdfFiles[index].filename = file;
+  }
+    console.log('find index new -1', index);
   }
 
+   console.log('check final //',this.pdfFiles);  
   }
   // requiredInput(filename,file){
 
@@ -65,16 +100,33 @@ uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawi
   //   }
   // }
   submitPdf(){
-    console.log('submit pdf1',this.coverLetter);
-    console.log('submit pdf2',this.budgetaryQuote);
-    console.log('submit pdf3',this.referenceMaterial);
-    console.log('submit pdf4',this.drawing);
-    console.log('submit pdf5',this.pdfDocument);
+    // let index = this.pdfFiles.findIndex(x => x.id === uniqueid);
+    this.pdfErr = false;
+    this.pdfFiles.length == 0 
+    let coverletter =  this.pdfFiles.findIndex(x => x.id === 1);
+    let budgetaryquote = this.pdfFiles.findIndex(x => x.id === 2);
+
+    if ( this.pdfFiles.length == 0){ this.pdfErr = true; this.pdfErrMsg = "Please upload pdf file"; console.log('blank',this.pdfFiles);}
+    else if(coverletter == -1 && budgetaryquote == -1){ this.pdfErr = true; this.pdfErrMsg = "Cover latter and Budgetary quote can not be blank"; console.log('select one',this.pdfFiles);}
+    else if(coverletter == -1 ){this.pdfErr = true; this.pdfErrMsg = "Cover latter can not be blank"; console.log('select coverletter',this.pdfFiles); }
+    else if(budgetaryquote == -1 ){this.pdfErr = true; this.pdfErrMsg = "Budgetary quote can not be blank"; console.log('select budgetaryquote',this.pdfFiles); }
+    else{this.pdfErr = false; console.log('send data',this.pdfFiles); this.pdfErrMsg = "pdf merged successfully";
+    var formData = new FormData(); 
+    this.pdfFiles.map(value=>{
+      console.log('files names',value.filename[0]);
+      formData.append('pdffiles', value.filename[0]);
+    })
+    // formData.append('pdffiles', 'Chris');    
+    this.apiservices.post(mergepdf,formData).subscribe((res:any)=>{
+      console.log('merged data',res);
+      this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('http://127.0.0.1:8080/'+res.result);
+     });
+       }
+   
+
   }
   ngOnInit(): void {
-	this.http.get("https://www.myshoetips.com/api/drager_pdf_modules").
-	subscribe((res:any)=>{
-		//console.log('mydata',res);
+	this.apiservices.get(constant.pdf_modules).subscribe((res:any)=>{
     this.ModPdfs = res;
   res.map(val=>{
     if(val.section_id == 1){

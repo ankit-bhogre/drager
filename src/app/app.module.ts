@@ -4,7 +4,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DrAirliquidComponent } from './uicomponent/dr-airliquid/dr-airliquid.component';
-
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NgxDocViewerModule } from 'ngx-doc-viewer';
 @NgModule({
   declarations: [
     AppComponent,
@@ -13,7 +14,9 @@ import { DrAirliquidComponent } from './uicomponent/dr-airliquid/dr-airliquid.co
   imports: [
     BrowserModule,
     AppRoutingModule,
-	HttpClientModule
+  HttpClientModule,
+  PdfViewerModule,
+  NgxDocViewerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -92,11 +92,15 @@ h6.artab_innertext {
 }
 .artab_requiredtext {
     padding: 15px;
-	clear:both;
+    clear:both;
+    
+}
+.artab_text{
+    border-top: 1px solid rgba(0,0,0,.2);
 }
 .artab_innerrequire{
     margin: 0;
-    border-bottom: 1px solid rgba(0,0,0,.2);
+    /* border-bottom: 1px solid rgba(0,0,0,.2); */
 }
 .control-label{font-weight:600; font-size:13px;}
 .right-side-chk input[type="checkbox"]{ margin-right:5px;}
@@ -124,6 +128,8 @@ input[type="file"]{
  }
  .arliquid_center_section {
     /* height: 100vh; */
+    height: 100vh;
+    overflow: auto;
     background-color: #ECF0F3;
 }
 .artab_uploadcover {
@@ -156,6 +162,13 @@ input[type="file"]{
 }
 .artab_insert_add{
     cursor: pointer;
+}
+.arliquid_pdf_aleart{
+    border-radius: 0 !important;
+    margin-bottom: 0 !important;
+}
+iframe{
+    margin-bottom: 100px;
 }
 .col-6{ float:left;}
 @media (min-width: 1200px){

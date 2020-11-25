@@ -79,6 +79,8 @@
               
               <div class="tab-content arliquid_tab_content" id="myTabContent" >
                 <div class="tab-pane fade show active" id="documentselection" role="tabpanel" aria-labelledby="document-tab">
+                  <!-- <ngx-doc-viewer url="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf" viewer="google"  style="width:100%;height:93vh;">
+                  </ngx-doc-viewer> -->
                     <div class="">
                         <div class="col-6 mr-0 pr-0">
                           <!-- section 1 -->
@@ -88,29 +90,38 @@
                                 </div>
                                 <!-- inner section 1 -->
                                 <div class="artab_uploadcover"> 
+                                  <!-- aleart -->
+                                  <div *ngIf="pdfErr" class="alert alert-danger alert-dismissible fade show arliquid_pdf_aleart" role="alert">
+                                     {{pdfErrMsg}}
+                                    <!-- <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                    </button> -->
+                                  </div>
+                                   <!-- aleart closed -->
+
                                    <p class="artab_requiredtext">Required</p>
-                                   <div class="artab_innerrequire col-md-12">
-                                     <div class="col-5 control-label">Cover letter</div>
+                                   <div class="artab_innerrequire col-md-12"  *ngFor="let fieldname of uploadmainField; let i = index">
+                                     <div class="col-5 control-label">{{fieldname.name}}</div>
                                      <div class="col-7 pl-0 ml-0">
                                     <form>
                                       <div class="form-group">
-                                        <input type="file" accept=".pdf"  class="form-control-file" id="exampleFormControlFile1">
+                                        <input type="file" accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
                                       </div>
                                     </form>
                                     </div>
-                                     <div class="col-5 control-label">Budgetary quote</div>
+                                     <!-- <div class="col-5 control-label">Budgetary quote</div>
                                      <div class="col-7 pl-0 ml-0">
                                        <form>
                                       <div class="form-group">
                                         <input type="file"  accept=".pdf" class="form-control-file" id="exampleFormControlFile1">
                                       </div>
                                     </form>
-                                     </div>
+                                     </div> -->
                                    </div>
                                 </div>
                                   <!-- inner section 2 -->
                                 <div class="artab_uploadcover"> 
-                                  <p class="artab_requiredtext">Optional</p>
+                                  <p class="artab_requiredtext artab_text">Optional</p>
                                   <div class="artab_innerrequire col-md-12">
                                     <div class="col-12">
                                      <div class="row" *ngFor="let fieldname of uploadpdfField; let i = index">
@@ -157,7 +168,7 @@
                                      </div>
                                   </div>
 								  
-								<div class="clearfix"></div>
+							                	<div class="clearfix"></div>
                                </div>
                             </div>
                             
@@ -237,7 +248,23 @@
                         </div>
                     </div>
                 </div>
-                <div class="tab-pane fade" id="pdfpreview" role="tabpanel" aria-labelledby="pdf-tab">Pdf reaing here.......</div>
+                <div class="tab-pane fade" id="pdfpreview" role="tabpanel" aria-labelledby="pdf-tab" >
+                  <!-- Pdf reaing here....... -->
+                  <!-- <pdf-viewer [src]="pdfSrc" 
+                  [render-text]="true"
+                  style="display: block;"></pdf-viewer> -->
+                <div class="col-12"> 
+                  <!-- <pdf-viewer [src]="src"
+                  [original-size]="false"
+                  ></pdf-viewer> -->
+                  <iframe [src]="urlSafe" width="100%" height="900px">
+                  </iframe>
+                  <!-- <ngx-doc-viewer [url]="src" viewer="google"  style="width:100%;height:93vh;">
+                  </ngx-doc-viewer> -->
+                </div>
+
+                </div>
+
               </div>
         </div>
        <!-- </div> -->
