@@ -170,6 +170,12 @@ input[type="file"]{
 iframe{
     margin-bottom: 100px;
 }
+/* ****** */
+.arliquid_aside_cross{
+    color: red;
+    padding: 6px;
+    font-size: 24px;
+}
 .col-6{ float:left;}
 @media (min-width: 1200px){
 .container {

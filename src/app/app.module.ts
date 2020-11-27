@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { DrAirliquidComponent } from './uicomponent/dr-airliquid/dr-airliquid.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
+import { FormsModule } from '@angular/forms';
+import {ReactiveFormsModule} from "@angular/forms";
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +18,9 @@ import { NgxDocViewerModule } from 'ngx-doc-viewer';
     AppRoutingModule,
   HttpClientModule,
   PdfViewerModule,
-  NgxDocViewerModule
+  NgxDocViewerModule,
+  FormsModule,
+  ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -2,7 +2,7 @@
     <div class="arliquid_header_body">
         <nav class="uib-menubar">
             <div class="uib-menubar__logo">
-              <div style="" class="uib-logo"></div>
+              <div  class="uib-logo"></div>
             </div>
             <div class="uib-menubar__title">
               <p class="arliquid_menubar1_heading">PDF Quote Packaging Tool</p>
@@ -31,16 +31,28 @@
         <div class="col-3 p-0 m-0 arliquid_aside_section">
            <div class="arliquid_aside_heading d-flex justify-content-between">
                <h6 class="arliquid_aside_inheading">Quote Content</h6>
-               <i class="uib-icon  uib-icon--edit arliquid_aside_inicon"></i>
+               <!-- (click)="slicify()" -->
+               <i *ngIf="asideCross"   class="uib-icon  uib-icon--edit arliquid_aside_inicon"></i>
+               <i *ngIf="!asideCross"  class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i>
            </div>
            <ul class="uib-list arliquid_aside_list">
             <li class="uib-list__item arliquid_aside_active">
-              <a class="uib-list__link arliquid_aside_activetext" href="#">Cover letter</a>
+              <a class="uib-list__link arliquid_aside_activetext" href="#">{{aside_covername}}</a>
             </li>
             <li class="uib-list__item arliquid_aside_active">
-              <a class="uib-list__link arliquid_aside_activetext" href="#">Budgetary quote</a>
+              <a class="uib-list__link arliquid_aside_activetext" href="#">{{aside_budgetarname}}</a>
             </li>
-            <li class="uib-list__item ">
+            <li class="uib-list__item " *ngFor="let checkbox of checkboxfiles; let i = index">
+              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">
+                {{checkbox.pdfname}}
+              <div class="arliquid_aside_remove">
+              <i *ngIf="!asideCross" (click)="removeAside(checkbox.mainid,i)" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i>
+              <i  *ngIf="asideCross"  class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
+              <i  *ngIf="asideCross" class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
+              </div>
+            </a>
+            </li>
+            <!-- <li class="uib-list__item ">
               <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">Item list
               <div class="arliquid_aside_remove">
               <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
@@ -55,15 +67,7 @@
               <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
               </div>
             </a>
-            </li>
-            <li class="uib-list__item ">
-              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">Item list
-              <div class="arliquid_aside_remove">
-              <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
-              <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
-              </div>
-            </a>
-            </li>
+            </li> -->
           </ul>
         </div>
         <!--  -->
@@ -173,8 +177,8 @@
                             </div>
                             
                         </div>
-                        <div class="col-6 ml-0 pl-0"  *ngFor="let Sec of newpdfdocs">
-                            <div class="arliquid_tab_innerbody1">
+                        <div class="col-6 ml-0 pl-0"  >
+                            <div class="arliquid_tab_innerbody1 mb-4" *ngFor="let Sec of newpdfdocs">
                                 <div class="artab_innerheading">
                                     <h6 class="artab_innertext">{{Sec.section_type}}</h6>
                                 </div>
@@ -185,8 +189,9 @@
                                       {{newdata.module_name}}
                                     </label>
                                     <div class="uib-accordion__content">
+                                      <!-- [(ngModel)]="model" -->
                                       <div class="uib-accordion__paragraph" *ngFor="let PDF of newdata.module_pdfs">
-                                        <label class="uib-accordion__title right-side-chk"><input type="checkbox" value="{{PDF.pdf_id}}" /> {{PDF.pdf_title}}</label>                                        
+                                        <label class="uib-accordion__title right-side-chk"><input type="checkbox"   value="{{PDF.pdf_id}}"  (change)="checkCheckBoxvalue(PDF.pdf_file_name,PDF.pdf_folder_path,$event.target.value)"/> {{PDF.pdf_title}}</label>                                        
                                       </div>
                                     </div>
                                   </div>

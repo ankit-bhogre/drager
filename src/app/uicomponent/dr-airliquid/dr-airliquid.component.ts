@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {constant,mergepdf} from '../../_services/constant'; 
+import {constant,mergepdf,checkbox_url} from '../../_services/constant'; 
 import {ApiservicesService} from '../../_services/apiservices.service';
 import { SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 @Component({
@@ -9,37 +9,55 @@ import { SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
 })
 
 export class DrAirliquidComponent implements OnInit {
-  coverLetter = null;
-  budgetaryQuote = null;
-  referenceMaterial = null;
-  drawing = null;
-  pdfDocument = null;
-  ModPdfs;
-  pdfFiles = [];
+//  coverLetter = null;
+//  budgetaryQuote = null;
+aside_covername = "cover Letter";
+aside_budgetarname = "Budgetary quote"
+ ModPdfs;
+ pdfFiles = [];
+ checkboxfiles = [];
  newValue = false;
  pdfErr = false;
  pdfErrMsg;
  srcs:any;
  urlSafe: SafeResourceUrl;
-
-//  srcs = "https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf";
-  // {"section_type":"Select product information documents","mainsection_id":2,"main_modules":[]}
+ isChecked : boolean;
+ model: any = {};
+ asideCross = true;
+ slicify = () => {this.asideCross = !this.asideCross}
+ removeAside(checkid,index){
+  console.log('my index', checkid,index);
+  this.checkboxfiles.splice(index,1);
+ }
   // Select third-party data sheets
-  newpdfdocs = [
+newpdfdocs = [
   {"section_type":"","mainsection_id":"","main_modules":[]},
   {"section_type":"","mainsection_id":"","main_modules":[]}
 ]
+
 uploadmainField = [{"unid":1,"name":"Cover letter"},{"unid":2,"name":"Budgetary quote"}]
-// ,{"unid":5,"name":"PDF Document"},{"unid":6,"name":"PDF Document"}
 uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawing"}]
+
   constructor(private apiservices:ApiservicesService,public sanitizer:DomSanitizer) {
-    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('http://127.0.0.1:8080/1606304420514.6174file.pdf');
+    this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(' https://eprocessdevelopment.com/Draeger/QPT/PDFS/FederalSignal/Federal Signal 27XST Strobe.pdf');
    }
- 
-  oninsertfield(){
+   checkCheckBoxvalue(checkfilename,checkfoldername,checkid){
+    let mainobject = {state: true,"mainid":checkid,"pdfname":checkfilename,"pdffullpath":checkbox_url+checkfoldername+'/'+checkfilename}
+    let stateIndex =  this.checkboxfiles.findIndex(x => x.mainid === checkid);
+    console.log('is checked', stateIndex);
+    if(stateIndex == -1){
+      console.log('not is checked', stateIndex);
+      this.checkboxfiles.push(mainobject);
+    }else{
+      this.checkboxfiles.splice(stateIndex,1);
+    }
+    console.log('check box value', this.checkboxfiles);
+   
+   }
+oninsertfield(){
   let newid_index = this.uploadpdfField.length -1;
   let newid = this.uploadpdfField[newid_index].unid;
-    newid++;
+  newid++;
     let fielddata = {
       "unid":newid,
       "name":"PDF Document"
@@ -48,7 +66,10 @@ uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawi
     console.log('m new arr', this.uploadpdfField);
   }
   requiredInput(uniqueid,index,file){
-  
+    console.log('check file name',file[0].name);
+  // for changing name of cover latter and budgetry quote on aside section 
+  if(uniqueid == 1){this.aside_covername = file[0].name}
+  else if(uniqueid == 2){this.aside_budgetarname = file[0].name}
     console.log('index',index,uniqueid);
     console.log('my array ++',this.pdfFiles.length);
 
@@ -75,30 +96,7 @@ uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawi
 
    console.log('check final //',this.pdfFiles);  
   }
-  // requiredInput(filename,file){
 
-  //   switch (filename) {
-  //     case 'cover':
-  //       this.coverLetter = file;
-  //       console.log('file type...2',  this.coverLetter)
-  //       break;
-  //     case 'budegetary':
-  //       this.budgetaryQuote = file;
-  //       console.log('file type...3',this.budgetaryQuote)
-  //       break;
-  //     case 'reference':
-  //       this.referenceMaterial = file;
-  //       console.log('file type...4', this.referenceMaterial)
-  //       break;
-  //     case  'drawing':
-  //       this.drawing = file;
-  //       console.log('file type...5', this.drawing)
-  //       break;
-  //      case  'pdfdocument':
-  //        this.pdfDocument = file;
-  //       console.log('file type...6',this.pdfDocument)
-  //   }
-  // }
   submitPdf(){
     // let index = this.pdfFiles.findIndex(x => x.id === uniqueid);
     this.pdfErr = false;
@@ -110,11 +108,16 @@ uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawi
     else if(coverletter == -1 && budgetaryquote == -1){ this.pdfErr = true; this.pdfErrMsg = "Cover latter and Budgetary quote can not be blank"; console.log('select one',this.pdfFiles);}
     else if(coverletter == -1 ){this.pdfErr = true; this.pdfErrMsg = "Cover latter can not be blank"; console.log('select coverletter',this.pdfFiles); }
     else if(budgetaryquote == -1 ){this.pdfErr = true; this.pdfErrMsg = "Budgetary quote can not be blank"; console.log('select budgetaryquote',this.pdfFiles); }
-    else{this.pdfErr = false; console.log('send data',this.pdfFiles); this.pdfErrMsg = "pdf merged successfully";
+    else {this.pdfErr = false; console.log('send data',this.pdfFiles); this.pdfErrMsg = "pdf merged successfully";
+    
     var formData = new FormData(); 
     this.pdfFiles.map(value=>{
       console.log('files names',value.filename[0]);
       formData.append('pdffiles', value.filename[0]);
+    })
+    this.checkboxfiles.map(value=>{
+      console.log('files names',value.pdffullpath);
+      formData.append('pdfpath', value.pdffullpath);
     })
     // formData.append('pdffiles', 'Chris');    
     this.apiservices.post(mergepdf,formData).subscribe((res:any)=>{
@@ -122,9 +125,9 @@ uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawi
       this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl('http://127.0.0.1:8080/'+res.result);
      });
        }
-   
+    }
 
-  }
+
   ngOnInit(): void {
 	this.apiservices.get(constant.pdf_modules).subscribe((res:any)=>{
     this.ModPdfs = res;
