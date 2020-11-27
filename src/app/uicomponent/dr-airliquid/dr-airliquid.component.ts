@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {constant,mergepdf,checkbox_url} from '../../_services/constant'; 
 import {ApiservicesService} from '../../_services/apiservices.service';
 import { SafeResourceUrl, DomSanitizer} from '@angular/platform-browser';
+import * as $ from 'jquery'; 
 @Component({
   selector: 'app-dr-airliquid',
   templateUrl: './dr-airliquid.component.html',
@@ -13,9 +14,13 @@ export class DrAirliquidComponent implements OnInit {
 //  budgetaryQuote = null;
 aside_covername = "cover Letter";
 aside_budgetarname = "Budgetary quote"
+asideReference = "";
+asideDrawing = "";
+disabletab = true;
  ModPdfs;
  pdfFiles = [];
  checkboxfiles = [];
+ asidename = [];
  newValue = false;
  pdfErr = false;
  pdfErrMsg;
@@ -26,8 +31,10 @@ aside_budgetarname = "Budgetary quote"
  asideCross = true;
  slicify = () => {this.asideCross = !this.asideCross}
  removeAside(checkid,index){
-  console.log('my index', checkid,index);
-  this.checkboxfiles.splice(index,1);
+  console.log('my index', checkid,this.checkboxfiles[index].mainid);
+  $('#tid'+this.checkboxfiles[index].mainid).trigger('click');
+ 
+  // this.checkboxfiles.splice(index,1);
  }
   // Select third-party data sheets
 newpdfdocs = [
@@ -66,11 +73,16 @@ oninsertfield(){
     console.log('m new arr', this.uploadpdfField);
   }
   requiredInput(uniqueid,index,file){
-    console.log('check file name',file[0].name);
+    console.log('check file name',uniqueid,file[0].name);
   // for changing name of cover latter and budgetry quote on aside section 
+  // asidename
+  this.asidename.push(file[0].name)
   if(uniqueid == 1){this.aside_covername = file[0].name}
   else if(uniqueid == 2){this.aside_budgetarname = file[0].name}
-    console.log('index',index,uniqueid);
+  else if(uniqueid == 3){this.asideReference = file[0].name}
+  else if(uniqueid == 4){this.asideDrawing = file[0].name}
+
+    console.log('index',index, this.asidename);
     console.log('my array ++',this.pdfFiles.length);
 
  if(this.pdfFiles.length == 0){
@@ -104,11 +116,11 @@ oninsertfield(){
     let coverletter =  this.pdfFiles.findIndex(x => x.id === 1);
     let budgetaryquote = this.pdfFiles.findIndex(x => x.id === 2);
 
-    if ( this.pdfFiles.length == 0){ this.pdfErr = true; this.pdfErrMsg = "Please upload pdf file"; console.log('blank',this.pdfFiles);}
+    if ( this.pdfFiles.length == 0){ this.pdfErr = true; this.pdfErrMsg = "Please upload required pdf file"; console.log('blank',this.pdfFiles);}
     else if(coverletter == -1 && budgetaryquote == -1){ this.pdfErr = true; this.pdfErrMsg = "Cover latter and Budgetary quote can not be blank"; console.log('select one',this.pdfFiles);}
     else if(coverletter == -1 ){this.pdfErr = true; this.pdfErrMsg = "Cover latter can not be blank"; console.log('select coverletter',this.pdfFiles); }
     else if(budgetaryquote == -1 ){this.pdfErr = true; this.pdfErrMsg = "Budgetary quote can not be blank"; console.log('select budgetaryquote',this.pdfFiles); }
-    else {this.pdfErr = false; console.log('send data',this.pdfFiles); this.pdfErrMsg = "pdf merged successfully";
+    else {this.pdfErr = false; this.disabletab = false; console.log('send data',this.pdfFiles); this.pdfErrMsg = "pdf merged successfully";
     
     var formData = new FormData(); 
     this.pdfFiles.map(value=>{

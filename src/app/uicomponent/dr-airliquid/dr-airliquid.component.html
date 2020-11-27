@@ -31,9 +31,8 @@
         <div class="col-3 p-0 m-0 arliquid_aside_section">
            <div class="arliquid_aside_heading d-flex justify-content-between">
                <h6 class="arliquid_aside_inheading">Quote Content</h6>
-               <!-- (click)="slicify()" -->
-               <i *ngIf="asideCross"   class="uib-icon  uib-icon--edit arliquid_aside_inicon"></i>
-               <i *ngIf="!asideCross"  class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i>
+               <i *ngIf="asideCross"  (click)="slicify()" class="uib-icon  uib-icon--edit arliquid_aside_inicon"></i>
+               <i *ngIf="!asideCross" (click)="slicify()" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i>
            </div>
            <ul class="uib-list arliquid_aside_list">
             <li class="uib-list__item arliquid_aside_active">
@@ -42,6 +41,15 @@
             <li class="uib-list__item arliquid_aside_active">
               <a class="uib-list__link arliquid_aside_activetext" href="#">{{aside_budgetarname}}</a>
             </li>
+            <li class="uib-list__item arliquid_aside_active" *ngFor="let pdfdata of pdfFiles">
+              <a class="uib-list__link arliquid_aside_activetext" *ngIf="pdfdata.id != 1 && pdfdata.id != 2" href="#">{{pdfdata.filename[0].name}}</a>
+            </li>
+            <!-- <li class="uib-list__item arliquid_aside_active" *ngIf="asideReference != ''">
+              <a class="uib-list__link arliquid_aside_activetext" href="#">{{asideReference}}</a>
+            </li>
+            <li class="uib-list__item arliquid_aside_active" *ngIf="asideDrawing != ''">
+              <a class="uib-list__link arliquid_aside_activetext" href="#">{{asideDrawing}}</a>
+            </li> -->
             <li class="uib-list__item " *ngFor="let checkbox of checkboxfiles; let i = index">
               <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">
                 {{checkbox.pdfname}}
@@ -76,8 +84,8 @@
                 <li class="nav-item arliquid_nav_item">
                   <a class="nav-link active" id="document-tab" data-toggle="tab" href="#documentselection" role="tab" aria-controls="documentselection" aria-selected="true">Document Selection</a>
                 </li>
-                <li class="nav-item arliquid_nav_item">
-                  <a class="nav-link" id="pdf-tab" data-toggle="tab" href="#pdfpreview" role="tab" aria-controls="pdfpreview" aria-selected="false">PDF Preview</a>
+                <li class="nav-item arliquid_nav_item" [ngStyle]="{'pointer-events': disabletab ? 'none' : 'inherit'}" >
+                  <a class="nav-link" href="#pdfpreview" id="pdf-tab" data-toggle="tab"  role="tab" aria-controls="pdfpreview" aria-selected="false">PDF Preview</a>
                 </li>
               </ul>
               
@@ -191,7 +199,7 @@
                                     <div class="uib-accordion__content">
                                       <!-- [(ngModel)]="model" -->
                                       <div class="uib-accordion__paragraph" *ngFor="let PDF of newdata.module_pdfs">
-                                        <label class="uib-accordion__title right-side-chk"><input type="checkbox"   value="{{PDF.pdf_id}}"  (change)="checkCheckBoxvalue(PDF.pdf_file_name,PDF.pdf_folder_path,$event.target.value)"/> {{PDF.pdf_title}}</label>                                        
+                                        <label class="uib-accordion__title right-side-chk"><input type="checkbox"  id="tid{{PDF.pdf_id}}" value="{{PDF.pdf_id}}"  (change)="checkCheckBoxvalue(PDF.pdf_file_name,PDF.pdf_folder_path,$event.target.value)"/> {{PDF.pdf_title}}</label>                                        
                                       </div>
                                     </div>
                                   </div>
