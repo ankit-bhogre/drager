@@ -1,4 +1,4 @@
-<header class="arliquid container p-0">
+<!-- <header class="arliquid container p-0">
     <div class="arliquid_header_body">
         <nav class="uib-menubar">
             <div class="uib-menubar__logo">
@@ -10,10 +10,9 @@
             <div class="uib-menubar__global-functions">
             </div>
           </nav>
-          <!-- second section -->
           <nav class="uib-menubar arliquid_menubar2">
             <div class="">
-              <!-- <div style="" class="uib-logo"></div> -->
+              <div style="" class="uib-logo"></div>
               <i class="fa fa-home  arliquid_menubar2_icon1" aria-hidden="true"></i>
             </div>
             <div class="uib-menubar__title">
@@ -24,15 +23,15 @@
             </div>
           </nav>
     </div>
-</header>
+</header> -->
 <div class="arliquid_body container p-0">
     <div class="row p-0 m-0">
         <!-- <div class="row"> -->
         <div class="col-3 p-0 m-0 arliquid_aside_section">
            <div class="arliquid_aside_heading d-flex justify-content-between">
                <h6 class="arliquid_aside_inheading">Quote Content</h6>
-               <i *ngIf="asideCross"  (click)="slicify()" class="uib-icon  uib-icon--edit arliquid_aside_inicon"></i>
-               <i *ngIf="!asideCross" (click)="slicify()" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i>
+               <i  (click)="slicify()" class="uib-icon  uib-icon--edit arliquid_aside_inicon"></i>
+               <!-- <i *ngIf="!asideCross" (click)="slicify()" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i> -->
            </div>
            <ul class="uib-list arliquid_aside_list">
             <li class="uib-list__item arliquid_aside_active">
@@ -51,12 +50,14 @@
               <a class="uib-list__link arliquid_aside_activetext" href="#">{{asideDrawing}}</a>
             </li> -->
             <li class="uib-list__item " *ngFor="let checkbox of checkboxfiles; let i = index">
-              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">
+              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" >
                 {{checkbox.pdfname}}
               <div class="arliquid_aside_remove">
-              <i *ngIf="!asideCross" (click)="removeAside(checkbox.mainid,i)" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i>
-              <i  *ngIf="asideCross"  class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
-              <i  *ngIf="asideCross" class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
+                <button type="button" *ngIf="!asideCross"  (click)="removeAside(checkbox.mainid,i)" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
+              <!-- <i *ngIf="asideCross" (click)="removeAside(checkbox.mainid,i)" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i> -->
+              <div class="uib-drag-handle" *ngIf="asideCross"></div>
+              <!-- <i  *ngIf="asideCross"  class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
+              <i  *ngIf="asideCross" class="uib-icon uib-icon--remove arliquid_aside_removebar"></i> -->
               </div>
             </a>
             </li>
@@ -93,8 +94,8 @@
                 <div class="tab-pane fade show active" id="documentselection" role="tabpanel" aria-labelledby="document-tab">
                   <!-- <ngx-doc-viewer url="https://vadimdez.github.io/ng2-pdf-viewer/assets/pdf-test.pdf" viewer="google"  style="width:100%;height:93vh;">
                   </ngx-doc-viewer> -->
-                    <div class="">
-                        <div class="col-6 mr-0 pr-0">
+                    <div class="arliquid_tab_section">
+                        <div class="col-6 mr-0 pr-0 arliquid_tab_section1">
                           <!-- section 1 -->
                             <div class="arliquid_tab_innerbody">
                                 <div class="artab_innerheading">
@@ -117,18 +118,10 @@
                                      <div class="col-7 pl-0 ml-0">
                                     <form>
                                       <div class="form-group">
-                                        <input type="file" accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
+                                        <input type="file" accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" >
                                       </div>
                                     </form>
                                     </div>
-                                     <!-- <div class="col-5 control-label">Budgetary quote</div>
-                                     <div class="col-7 pl-0 ml-0">
-                                       <form>
-                                      <div class="form-group">
-                                        <input type="file"  accept=".pdf" class="form-control-file" id="exampleFormControlFile1">
-                                      </div>
-                                    </form>
-                                     </div> -->
                                    </div>
                                 </div>
                                   <!-- inner section 2 -->
@@ -141,26 +134,10 @@
                                         <div class="col-7 pl-0 ml-0">
                                       <form>
                                         <div class="form-group">
-                                          <input type="file"  accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
+                                          <input type="file"  accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" >
                                         </div>
                                       </form>
                                       </div>
-                                        <!-- <div class="col-5">Drawing</div>
-                                        <div class="col-7 pl-0 ml-0">
-                                          <form>
-                                        <div class="form-group">
-                                          <input type="file"  accept=".pdf" (change)="requiredInput('drawing',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
-                                        </div>
-                                      </form>
-                                        </div>
-                                        <div class="col-5">PDF Document</div>
-                                        <div class="col-7 pl-0 ml-0">
-                                          <form>
-                                        <div class="form-group">
-                                          <input type="file"  accept=".pdf" (change)="requiredInput('pdfdocument',$event.target.files)" class="form-control-file" id="exampleFormControlFile1">
-                                        </div>
-                                      </form>
-                                        </div> -->
                                     </div>
                                   </div>
                                     <!-- insert additional field button -->
@@ -185,7 +162,7 @@
                             </div>
                             
                         </div>
-                        <div class="col-6 ml-0 pl-0"  >
+                        <div class="col-6 ml-0 pl-0 arliquid_tab_section2"  >
                             <div class="arliquid_tab_innerbody1 mb-4" *ngFor="let Sec of newpdfdocs">
                                 <div class="artab_innerheading">
                                     <h6 class="artab_innertext">{{Sec.section_type}}</h6>

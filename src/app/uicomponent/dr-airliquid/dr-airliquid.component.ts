@@ -47,7 +47,7 @@ uploadpdfField = [{"unid":3,"name":"Reference material"},{"unid":4,"name":"Drawi
 
   constructor(private apiservices:ApiservicesService,public sanitizer:DomSanitizer) {
     this.urlSafe= this.sanitizer.bypassSecurityTrustResourceUrl(' https://eprocessdevelopment.com/Draeger/QPT/PDFS/FederalSignal/Federal Signal 27XST Strobe.pdf');
-   }
+  }
    checkCheckBoxvalue(checkfilename,checkfoldername,checkid){
     let mainobject = {state: true,"mainid":checkid,"pdfname":checkfilename,"pdffullpath":checkbox_url+checkfoldername+'/'+checkfilename}
     let stateIndex =  this.checkboxfiles.findIndex(x => x.mainid === checkid);
@@ -148,16 +148,13 @@ oninsertfield(){
       this.newpdfdocs[0].section_type = "Select Third-party Data Sheets",
       this.newpdfdocs[0].mainsection_id = "se1",
       this.newpdfdocs[0].main_modules.push(val)
-      console.log('my test 1',val)
     }
     if(val.section_id == 2){
       this.newpdfdocs[1].section_type = "Select Product Information Documents",
       this.newpdfdocs[1].mainsection_id = "se2",
       this.newpdfdocs[1].main_modules.push(val)
-      console.log('my test 2',val)
     }
   })
-    console.log('my arres', this.newpdfdocs);
 	})
   }
 

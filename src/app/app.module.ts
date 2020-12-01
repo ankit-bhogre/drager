@@ -8,10 +8,16 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NgxDocViewerModule } from 'ngx-doc-viewer';
 import { FormsModule } from '@angular/forms';
 import {ReactiveFormsModule} from "@angular/forms";
+import { LoginComponent } from './uicomponent/login/login.component';
+import { SelectoptionComponent } from './uicomponent/selectoption/selectoption.component';
+import { HeaderComponent } from './uicomponent/header/header.component';
 @NgModule({
   declarations: [
     AppComponent,
-    DrAirliquidComponent
+    DrAirliquidComponent,
+    LoginComponent,
+    SelectoptionComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
