@@ -8,8 +8,9 @@ export const constant = {
     "getquote"    : BASE_URL+"user_quotes?user_id=",
     "createquote" : BASE_URL+"create_quote",
     "submitpdf"   : BASE_URL+"up_quote_pdfs",
-     "mergepdf"   : BASE_URL+"merging_pdfs",
-     "updateQuote": BASE_URL+"update_selected_quote"
+    "mergepdf"    : BASE_URL+"merging_pdfs",
+    "updateQuote" : BASE_URL+"update_selected_quote",
+    "showpdf"     : BASE_URL+"pdf_preview"
 };  
 
 
