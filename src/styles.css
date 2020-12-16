@@ -9,13 +9,13 @@ body{
 }
 .arliquid_menubar2_icon1 {
     color: #6D6F72;
-    font-size: 33px;
+    font-size: 28px;
     padding-left: 13px;
     
 }
 .arliquid_menubar2_icon2 {
     color: #6D6F72;
-    font-size: 33px;
+    font-size: 28px;
     padding-right: 40px;
 }
 .arliquid_menubar2_heading {
@@ -80,7 +80,7 @@ background-color:#D9DDE0;
 .arliquid_nav_tab{
     background-color: #ECF0F3;
 }
-
+.tab_btn{padding:8px 20px;}
 .arliquid_tab_innerbody{
     box-shadow: 0 8px 8px 0 rgba(0,0,0,0.2);
     margin: 10px;
@@ -99,6 +99,7 @@ h6.artab_innertext {
     padding:  10px;
     font-weight: 600;
 	letter-spacing: 0.2px;
+	font-size:13px;
 }
 .artab_requiredtext {
     padding: 15px;
@@ -169,6 +170,7 @@ input[type="file"]{
     margin-left: 10px;
     font-weight: 600;
     color: #575c5fbf;
+	font-size:13px;
 }
 .artab_insert_add{
     cursor: pointer;
@@ -307,7 +309,7 @@ left:48%;
 
 /* airLiquid */
 .airliquid_main_content{
-padding-top:70px;
+padding-top:0px;
 }
 .airliquid_main_inner1{
 background: #fff;
