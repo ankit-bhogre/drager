@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,Validators} from '@angular/forms';
 import {ApiservicesService} from '../../_services/apiservices.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -10,7 +11,13 @@ export class LoginComponent implements OnInit {
   loginForm:FormGroup;
   submit = false;
   invalidloginMsg; 
-  constructor(private fb:FormBuilder,private apiservice:ApiservicesService) { }
+  constructor(private fb:FormBuilder,private apiservice:ApiservicesService,private router: Router) {
+    let userToken = localStorage.getItem('usertoken');
+      let userRole = localStorage.getItem('loginid');
+      if(userToken && userRole){
+        this.router.navigate(['']);
+      }
+   }
  
   ngOnInit(): void {
     this.invalidloginMsg = "";

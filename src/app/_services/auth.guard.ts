@@ -12,7 +12,9 @@ constructor(private router: Router){}
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       let newtoken = localStorage.getItem('usertoken');
-      if(!!newtoken){  
+      let userloggedId = localStorage.getItem('loginid');
+      if(!!newtoken && userloggedId){  
+        console.log('loggedin',userloggedId)
       return true;
     }
       else{this.router.navigate(['/login']);return false;}

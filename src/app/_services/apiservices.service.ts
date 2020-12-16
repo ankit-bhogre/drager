@@ -3,6 +3,7 @@ import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http
 import { throwError,Observable,Subject,BehaviorSubject } from 'rxjs';
 import { retry,catchError,map } from 'rxjs/operators';
 import {Router} from '@angular/router';
+import {constant} from '../_services/constant'; 
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +11,7 @@ export class ApiservicesService {
  
 //  private user = new BehaviorSubject<any>('0');
     // private user = new Subject<any>();
-   private user = new BehaviorSubject<any>(localStorage.setItem('quotename','Air Liquide - PA07302023'));
+   private user = new BehaviorSubject<any>('');
    castUser = this.user.asObservable();
 
   constructor(private http:HttpClient, private router: Router) { }
@@ -35,7 +36,16 @@ export class ApiservicesService {
   dummyLogin(credential){
     if(credential.username == "admin" && credential.password == "123456"){
       let dummytoken = Math.floor(100000 + Math.random() * 900000);
+      let loginId = 1;
       localStorage.setItem('usertoken',JSON.stringify(dummytoken));
+      localStorage.setItem('loginid',JSON.stringify(loginId));
+      var formData = new FormData(); 
+      formData.append('user_id',JSON.stringify(loginId));
+      this.post(constant.previousquote,formData).subscribe((res:any)=>{
+        if(res && res.status == true){
+           this.user.next(localStorage.setItem('quotename',res.quote_name)) 
+          }
+      })
       this.router.navigate(['']);
       return true }
     else { return false }

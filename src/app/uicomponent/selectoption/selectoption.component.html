@@ -84,7 +84,7 @@
                     <div class="quote_createErr"><p class="text-danger pt-1">{{QuoteCreateMsg}}</p></div>
                   </div>
                 <div class="text-center">
-                <button type="submit" class="btn btn-primary login_submit_btn">ok</button>
+                <button type="submit" class="btn btn-primary login_submit_btn">OK</button>
                 </div>
              </form>
           </div>
@@ -110,12 +110,12 @@
                       <a class="uib-list__link" >{{existQuote}}</a>
                     </li> -->
                     <li class="uib-list__item" *ngFor="let existQuote of existQuotes; let i = index" [ngClass]="{'activequote': excerpt[i] == true}" (click)=" slicify(i)" >
-                      <a class="uib-list__link" >{{existQuote.quote_name}}</a>
+                      <a class="uib-list__link existing_listing" >{{existQuote.quote_name}}</a>
                     </li>
                 </ul>
              </div>
                   <div class="text-center airliquid_select_okbtn">
-                  <button type="submit" class="btn btn-primary login_submit_btn" (click)="selectexistQuote()">ok</button>
+                  <button type="submit" class="btn btn-primary login_submit_btn" (click)="selectexistQuote()">OK</button>
                   </div>
               
             </div>

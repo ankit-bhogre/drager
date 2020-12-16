@@ -10,7 +10,8 @@ export const constant = {
     "submitpdf"   : BASE_URL+"up_quote_pdfs",
     "mergepdf"    : BASE_URL+"merging_pdfs",
     "updateQuote" : BASE_URL+"update_selected_quote",
-    "showpdf"     : BASE_URL+"pdf_preview"
+    "showpdf"     : BASE_URL+"pdf_preview",
+  "previousquote" : BASE_URL+"previous_quote"
 };  
 
 
