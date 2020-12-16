@@ -318,12 +318,11 @@ margin: 15px;
 padding: 30px 30px;
 min-width: 30%;
 position: relative;
-padding-bottom: 65px !important;
-margin-bottom: 100px;
+border-radius:3px;
 }
 .airliquid_inner_text {
 color: #54595C;
-font-size: 21px;
+font-size: 18px;
 }
 .airliquid_content_inner {
 padding-bottom: 15px;
