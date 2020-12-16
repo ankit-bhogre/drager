@@ -11,6 +11,10 @@ import {ReactiveFormsModule} from "@angular/forms";
 import { LoginComponent } from './uicomponent/login/login.component';
 import { SelectoptionComponent } from './uicomponent/selectoption/selectoption.component';
 import { HeaderComponent } from './uicomponent/header/header.component';
+import { MatCardModule } from '@angular/material/card';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +30,10 @@ import { HeaderComponent } from './uicomponent/header/header.component';
   PdfViewerModule,
   NgxDocViewerModule,
   FormsModule,
-  ReactiveFormsModule
+  ReactiveFormsModule,
+  MatCardModule,
+  BrowserAnimationsModule,
+  DragDropModule
   ],
   providers: [],
   bootstrap: [AppComponent]

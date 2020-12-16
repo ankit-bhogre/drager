@@ -9,12 +9,13 @@ import {ApiservicesService} from '../../_services/apiservices.service';
 export class HeaderComponent implements OnInit {
 headerTrue = true;
 urlroute;
-filename = "Air Liquide - PA07302020";
+filename ;
 
   constructor(private routes:Router,private apiservice:ApiservicesService) {
     this.apiservice.castUser.subscribe(res=>{
-      this.filename = res;
-      console.log('liquid component header', res);
+      // this.filename = res;
+      this.filename = localStorage.getItem('quotename')
+      console.log('liquid component header', localStorage.getItem('quotename'));
     })
    }
 

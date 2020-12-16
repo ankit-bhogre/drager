@@ -59,6 +59,12 @@
         <div  class="d-flex flex-column flex-md-row justify-content-center">
         <!-- inner 1 -->
         <div class="airliquid_main_inner1">
+          <!-- <div class="uib-snackbar">
+            <div class="uib-snackbar__text">
+              <p class="uib-snackbar__title">Snackbar title</p>
+            </div>
+            <div class="uib-snackbar__buttons"></div>
+          </div> -->
           <div class="airliquid_content_inner">
             <h4 class="airliquid_inner_text">Create new quote</h4>
           </div>
@@ -75,6 +81,7 @@
                        />
                       <span class="uib-textfield__validation-icon"></span>
                     </div>
+                    <div class="quote_createErr"><p class="text-danger pt-1">{{QuoteCreateMsg}}</p></div>
                   </div>
                 <div class="text-center">
                 <button type="submit" class="btn btn-primary login_submit_btn">ok</button>
@@ -99,8 +106,11 @@
             <div class="login_content_form">
              <div class="airliquid_select">
                 <ul class="uib-list arliquid_aside_list">
-                    <li class="uib-list__item" *ngFor="let existQuote of existQuotes; let i = index" [ngClass]="{'activequote': excerpt[i] == true}" (click)=" slicify(i)" >
+                    <!-- <li class="uib-list__item" *ngFor="let existQuote of existQuotes; let i = index" [ngClass]="{'activequote': excerpt[i] == true}" (click)=" slicify(i)" >
                       <a class="uib-list__link" >{{existQuote}}</a>
+                    </li> -->
+                    <li class="uib-list__item" *ngFor="let existQuote of existQuotes; let i = index" [ngClass]="{'activequote': excerpt[i] == true}" (click)=" slicify(i)" >
+                      <a class="uib-list__link" >{{existQuote.quote_name}}</a>
                     </li>
                 </ul>
              </div>

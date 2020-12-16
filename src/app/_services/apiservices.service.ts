@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { throwError,Observable,Subject,BehaviorSubject } from 'rxjs';
 import { retry,catchError,map } from 'rxjs/operators';
 import {Router} from '@angular/router';
@@ -9,13 +9,23 @@ import {Router} from '@angular/router';
 export class ApiservicesService {
  
 //  private user = new BehaviorSubject<any>('0');
-
-   private user = new Subject<any>();
+    // private user = new Subject<any>();
+   private user = new BehaviorSubject<any>(localStorage.setItem('quotename','Air Liquide - PA07302023'));
    castUser = this.user.asObservable();
 
   constructor(private http:HttpClient, private router: Router) { }
-
+  // headers = new HttpHeaders();
+  
+  // post(url,data):Observable<any>{
+  //   let headers = new HttpHeaders()
+  //   headers=headers.append('loggeduserid','uploadbase'+'15');
+  //   headers=headers.append('userpdfdir','mergebase'+'15');
+  //   return this.http.post<any>(url,data,{'headers':headers}).pipe( map( res=>{ if (!!res) { return res;} return false }), catchError(this.handleError))
+  // }
   post(url,data):Observable<any>{
+    // let headers = new HttpHeaders()
+    // headers=headers.append('loggeduserid','uploadbase'+'15');
+    // headers=headers.append('userpdfdir','mergebase'+'15');
     return this.http.post<any>(url,data).pipe( map( res=>{ if (!!res) { return res;} return false }), catchError(this.handleError))
   }
   get(url):Observable<any>{
@@ -50,7 +60,9 @@ export class ApiservicesService {
       // ***************************Data Sharing close*******************************************
 
          sharePdf(pdfname){ 
-          this.user.next(pdfname);
+         
+          // this.user.next(pdfname);
+          this.user.next(localStorage.setItem('quotename',pdfname));
            console.log('test name', pdfname)}
 
       // ***************************Data Sharing close*******************************************

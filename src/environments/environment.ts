@@ -1,12 +1,14 @@
 // This file can be replaced during build by using the `fileReplacements` array.
 // `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
-
+// api_url:'https://www.myshoetips.com/api/',
 export const environment = {
   production: false,
-  api_url:'https://www.myshoetips.com/api/',
-  mergeapi_url:'http://localhost:3000/'
+  api_url:'https://eprocessdevelopment.com/Draeger/QPT/Backend/api/',
+  mergeapi_url:'https://demo-node-1.herokuapp.com/'
 };
+// https://demo-node-1.herokuapp.com/
+// http://localhost:3000/
 
 /*
  * For easier debugging in development mode, you can import the following file

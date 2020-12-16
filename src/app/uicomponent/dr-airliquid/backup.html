@@ -34,40 +34,13 @@
                <!-- <i *ngIf="!asideCross" (click)="slicify()" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i> -->
            </div>
            <!-- **************************** test *********************** -->
-           <div class="list-container">
-                    <!-- <div class="list"
-                        cdkDropList
-                        #todoList="cdkDropList"
-                        [cdkDropListData]="pdfFiles"
-                        (cdkDropListDropped)="onDrop($event)">
-                          <ul class="uib-list arliquid_aside_list" *ngFor="let todo of pdfFiles" cdkDrag>
-                          <li  *ngIf="todo.id">
-                            <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" *ngIf="todo.id != 1 && todo.id != 2">
-                              {{todo?.filename[0].name}}
-                            <div class="arliquid_aside_remove">
-                              <button type="button" *ngIf="!asideCross"  (click)="removeAside(todo.id,i,'optionalpdf')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-                            <div class="uib-drag-handle" *ngIf="asideCross"></div>
-                            </div>
-                          </a>
-                          </li>
-                          <li  *ngIf="!todo.id">
-                            <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner">
-                              {{todo?.pdfname}}
-                            <div class="arliquid_aside_remove">
-                              <button type="button" *ngIf="!asideCross"  (click)="removeAside(todo?.mainid,i,'checkbox')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-                            <div class="uib-drag-handle" *ngIf="asideCross"></div>
-                            </div>
-                          </a>
-                          </li>
-                        </ul>
-                  </div> -->
-               
-            <!-- [cdkDropListConnectedTo]="[doneList]" -->
-            <!-- <div class="todo-container column-container">
+           <!-- <div class="list-container">
+            <div class="todo-container column-container">
               <div class="list"
                    cdkDropList
                    #todoList="cdkDropList"
                    [cdkDropListData]="todos"
+                   [cdkDropListConnectedTo]="[doneList]"
                    (cdkDropListDropped)="onDrop($event)">
                 <h2>Tech to learn</h2>
                 <mat-card *ngFor="let todo of todos" cdkDrag>
@@ -89,10 +62,8 @@
                   </mat-card-header>
                 </mat-card>
               </div>
-            </div> -->
-          </div>
-
-             
+            </div>
+          </div> -->
            <!-- **************************** test *********************** -->
            <ul class="uib-list arliquid_aside_list">
             <li class="uib-list__item arliquid_aside_active">
@@ -101,102 +72,45 @@
             <li class="uib-list__item arliquid_aside_active">
               <a class="uib-list__link arliquid_aside_activetext" href="#">{{aside_budgetarname}}</a>
             </li>
-            <!-- dummy -->
-        
-            <!-- <div
-          
-            >
-            <li class="uib-list__item " *ngFor="let pdfdata of pdfFiles; let i = index">
-              
-            <div  *ngIf="pdfdata.id">
-                <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" *ngIf="pdfdata.id != 1 && pdfdata.id != 2">
-                  {{pdfdata?.filename[0].name}}
-                <div class="arliquid_aside_remove">
-                  <button type="button" *ngIf="!asideCross"  (click)="removeAside(pdfdata.id,i,'optionalpdf')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-                <div class="uib-drag-handle" *ngIf="asideCross"></div>
-                </div>
-              </a>
-             </div>
-
-            <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" *ngIf="!pdfdata.id">
-              {{pdfdata?.pdfname}}
-            <div class="arliquid_aside_remove">
-              <button type="button" *ngIf="!asideCross"  (click)="removeAside(pdfdata?.mainid,i,'checkbox')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-            <div class="uib-drag-handle" *ngIf="asideCross"></div>
-            </div>
-          </a>
-            </li>
-         </div> -->
-            <!-- dummy  -->
-            <!-- <li class="uib-list__item arliquid_aside_active" *ngFor="let pdfdata of pdfFiles">
+            <li class="uib-list__item arliquid_aside_active" *ngFor="let pdfdata of pdfFiles">
               <a class="uib-list__link arliquid_aside_activetext" *ngIf="pdfdata?.id != 1 && pdfdata?.id != 2" href="#">{{pdfdata?.filename[0].name}}</a>
+            </li>
+
+            <!-- <li class="uib-list__item arliquid_aside_active" *ngIf="asideReference != ''">
+              <a class="uib-list__link arliquid_aside_activetext" href="#">{{asideReference}}</a>
+            </li>
+            <li class="uib-list__item arliquid_aside_active" *ngIf="asideDrawing != ''">
+              <a class="uib-list__link arliquid_aside_activetext" href="#">{{asideDrawing}}</a>
             </li> -->
-         
-            <!-- <li class="uib-list__item " *ngFor="let checkbox of checkboxfiles; let i = index">
+            <li class="uib-list__item " *ngFor="let checkbox of checkboxfiles; let i = index">
               <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" >
                 {{checkbox.pdfname}}
               <div class="arliquid_aside_remove">
                 <button type="button" *ngIf="!asideCross"  (click)="removeAside(checkbox.mainid,i)" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
+              <!-- <i *ngIf="asideCross" (click)="removeAside(checkbox.mainid,i)" class="fa fa-times arliquid_aside_cross" aria-hidden="true"></i> -->
               <div class="uib-drag-handle" *ngIf="asideCross"></div>
+              <!-- <i  *ngIf="asideCross"  class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
+              <i  *ngIf="asideCross" class="uib-icon uib-icon--remove arliquid_aside_removebar"></i> -->
               </div>
             </a>
             </li>
-           -->
-          </ul>
-          <!-- ------ -->
-          <div >
-            <ul class="uib-list arliquid_aside_list" 
-            class="list"
-          cdkDropList
-          #todoList="cdkDropList"
-          [cdkDropListData]="pdfFiles"
-          (cdkDropListDropped)="onDrop($event)"
-            >
-            <!-- <li  *ngIf="todo.id">
-              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" *ngIf="todo.id != 1 && todo.id != 2">
-                {{todo?.filename[0].name}}
+            <!-- <li class="uib-list__item ">
+              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">Item list
               <div class="arliquid_aside_remove">
-                <button type="button" *ngIf="!asideCross"  (click)="removeAside(todo.id,i,'optionalpdf')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-              <div class="uib-drag-handle" *ngIf="asideCross"></div>
+              <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
+              <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
               </div>
             </a>
             </li>
-            <li  *ngIf="!todo.id">
-              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner">
-                {{todo?.pdfname}}
+            <li class="uib-list__item ">
+              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" href="#">Item list
               <div class="arliquid_aside_remove">
-                <button type="button" *ngIf="!asideCross"  (click)="removeAside(todo?.mainid,i,'checkbox')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-              <div class="uib-drag-handle" *ngIf="asideCross"></div>
+              <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
+              <i class="uib-icon uib-icon--remove arliquid_aside_removebar"></i>
               </div>
             </a>
             </li> -->
-            <!-- dddd -->
-            <li class="uib-list__item" *ngFor="let todo of pdfFiles; let i=index" cdkDrag>
-              <span  *ngIf="todo.id">
-              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner" *ngIf="todo.id != 1 && todo.id != 2">
-                {{todo?.filename[0]?.name}}
-              <div class="arliquid_aside_remove">
-                <button type="button" *ngIf="!asideCross"  (click)="removeAside(todo.id,i,'optionalpdf')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-              <div class="uib-drag-handle" *ngIf="asideCross"></div>
-              </div>
-            </a>
-            </span>
-           
-              <span *ngIf="!todo.id">
-              <a class="uib-list__link d-flex justify-content-between  arliquid_aside_inner">
-                {{todo?.original_pdf_name}}
-              <div class="arliquid_aside_remove">
-                <button type="button" *ngIf="!asideCross"  (click)="removeAside(todo?.mainid,i,'checkbox')" class="uib-button uib-button--circular uib_circle_removebtn"><span class="uib_circle_remove">-</span></button>
-              <div class="uib-drag-handle" *ngIf="asideCross"></div>
-              </div>
-            </a>
-             </span>
-            </li>
-            <!-- dddd -->
-                
           </ul>
-    </div>
-          <!-- ------ -->
         </div>
         <!--  -->
         <div class="col-9 p-0 m-0 arliquid_center_section">
@@ -205,7 +119,7 @@
                   <a class="nav-link active" id="document-tab" data-toggle="tab" href="#documentselection" role="tab" aria-controls="documentselection" aria-selected="true">Document Selection</a>
                 </li>
                 <li class="nav-item arliquid_nav_item" [ngStyle]="{'pointer-events': disabletab ? 'none' : 'inherit'}" >
-                  <a class="nav-link" href="#pdfpreview" id="pdf-tab" data-toggle="tab"  role="tab" aria-controls="pdfpreview" aria-selected="false" (click)="switchTab()">PDF Preview</a>
+                  <a class="nav-link" href="#pdfpreview" id="pdf-tab" data-toggle="tab"  role="tab" aria-controls="pdfpreview" aria-selected="false">PDF Preview</a>
                 </li>
               </ul>
               
@@ -236,8 +150,8 @@
                                      <div class="col-5 control-label">{{fieldname.name}}</div>
                                      <div class="col-7 pl-0 ml-0">
                                     <form>
-                                      <div class="form-group" >
-                                        <input type="file" accept=".pdf"  (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file cb-element" #documentinputFile>
+                                      <div class="form-group">
+                                        <input type="file" accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" >
                                       </div>
                                     </form>
                                     </div>
@@ -253,7 +167,7 @@
                                         <div class="col-7 pl-0 ml-0">
                                       <form>
                                         <div class="form-group">
-                                          <input type="file"  accept=".pdf"  (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file cb-element"  #optionalinputFile>
+                                          <input type="file"  accept=".pdf" (change)="requiredInput(fieldname.unid,i,$event.target.files)" class="form-control-file" >
                                         </div>
                                       </form>
                                       </div>
@@ -270,10 +184,7 @@
 
                                      <div class="artab_insert_additional col-12 text-right pb-3">
                                       <div class="uib-actionbar add_btn" role="group">
-                                        <button type="button" class="uib-button uib-button--action add_btn_inner" (click)="submitPdf()" [disabled]="isProcess">
-                                          <span *ngIf="isMarged"><div class="loader" ></div></span>
-                                          <span  *ngIf="!isMarged">Add</span>
-                                        </button>
+                                        <button type="button" class="uib-button uib-button--action add_btn_inner" (click)="submitPdf()">Add</button>
                                       </div>
                                       <!-- <button type="button" class="btn btn-primary" (click)="submitPdf()">Add</button> -->
                                      </div>
@@ -298,7 +209,7 @@
                                     <div class="uib-accordion__content">
                                       <!-- [(ngModel)]="model" -->
                                       <div class="uib-accordion__paragraph" *ngFor="let PDF of newdata.module_pdfs">
-                                        <label class="uib-accordion__title right-side-chk"><input type="checkbox"  id="tid{{PDF.pdf_id}}" value="{{PDF.pdf_id}}"  (change)="checkCheckBoxvalue(PDF.pdf_id,PDF.pdf_type,PDF.pdf_file_name,PDF.pdf_folder_path,$event.target.value)"/> {{PDF.pdf_title}}</label>                                        
+                                        <label class="uib-accordion__title right-side-chk"><input type="checkbox"  id="tid{{PDF.pdf_id}}" value="{{PDF.pdf_id}}"  (change)="checkCheckBoxvalue(PDF.pdf_file_name,PDF.pdf_folder_path,$event.target.value)"/> {{PDF.pdf_title}}</label>                                        
                                       </div>
                                     </div>
                                   </div>
@@ -365,11 +276,6 @@
                   <!-- <pdf-viewer [src]="pdfSrc" 
                   [render-text]="true"
                   style="display: block;"></pdf-viewer> -->
-                  <!-- loader -->
-                  <div class="col-12 text-center" *ngIf="previreloader"> 
-                  <div class="previewloader mx-auto"></div>
-                </div>
-                <!-- pdf preview -->
                 <div class="col-12"> 
                   <iframe [src]="urlSafe" width="100%" height="900px">
                   </iframe>
