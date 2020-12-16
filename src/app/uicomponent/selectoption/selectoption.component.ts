@@ -11,11 +11,11 @@ import {Router} from '@angular/router';
 export class SelectoptionComponent implements OnInit {
   submitted = false;
   newQuote:FormGroup;
-  dummmy_loginid = "1";
+  dummmy_loginid = localStorage.getItem('loginid');
   QuoteCreateMsg;
   existQuoteid;
   existuserid;
- existQuotename;
+  existQuotename;
   // below arry will show api data list
   // existQuotes = ['AdvnSix-PA0252020','AdvnSix-PA0252021','AdvnSix-PA0252022','AdvnSix-PA0252023','AdvnSix-PA0252024'];
   existQuotes = [];
@@ -45,7 +45,7 @@ export class SelectoptionComponent implements OnInit {
                    
                     this.apiservices.sharePdf(this.existQuotes[i].quote_name);
                     this.existQuoteid = this.existQuotes[i].quote_id;
-                    this.existuserid  = this.existQuotes[i].user_id;
+                    // this.existuserid  = this.existQuotes[i].user_id;
                     this.existQuotename = this.existQuotes[i].quote_name;
                   }
                     
@@ -82,13 +82,13 @@ export class SelectoptionComponent implements OnInit {
     if(this.excerpt.indexOf(true) != -1)
     { 
       var formData = new FormData(); 
-      formData.append('user_id',this.existuserid);
+      formData.append('user_id',this.dummmy_loginid);
       formData.append('quote_id',this.existQuoteid);
       formData.append('quote_name', this.existQuotename);
       this.apiservices.post(constant.updateQuote,formData).subscribe((res:any)=>{
       console.log('selected res here',res);
       if(res && res.status == true){
-        this.router.navigate(['/mergepdf'],{ queryParams: { user: this.existuserid,quote: this.existQuoteid }}); console.log('check val', this.excerpt.indexOf(true)); 
+        this.router.navigate(['/mergepdf'],{ queryParams: { user: this.dummmy_loginid,quote: this.existQuoteid }}); console.log('check val', this.excerpt.indexOf(true)); 
       }
       })
     

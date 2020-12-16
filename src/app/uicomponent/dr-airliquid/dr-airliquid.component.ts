@@ -14,7 +14,7 @@ import * as $ from 'jquery';
 export class DrAirliquidComponent implements OnInit {
 //  coverLetter = null;
 //  budgetaryQuote = null;
-aside_covername = "cover Letter";
+aside_covername = "Cover letter";
 aside_budgetarname = "Budgetary quote"
 asideReference = "";
 asideDrawing = "";
@@ -122,7 +122,7 @@ oninsertfield(){
      this.pdfFiles.map((val,index)=>{
 
       if(val.id && (val.id == 1)){
-        this.aside_covername = "cover Letter";
+        this.aside_covername = "Cover letter";
       }else if(val.id && (val.id == 2)){
         this.aside_budgetarname = "Budgetary quote"
       }
@@ -194,9 +194,8 @@ oninsertfield(){
       this.pdfErr = false; 
       this.arraySeq = [];
       let arrayUrl = [];
+      
       var formData = new FormData(); 
-
-  
       formData.append('user_id', this.userId);
       formData.append('quote_id',this.quoteId);
       let testindexid = []
